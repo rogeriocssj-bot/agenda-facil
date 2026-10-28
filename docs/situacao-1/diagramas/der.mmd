@@ -1,0 +1,45 @@
+erDiagram
+    USUARIOS ||--o{ AGENDAMENTOS : "realiza"
+    SERVICOS ||--o{ AGENDAMENTOS : "é agendado em"
+    PROFISSIONAIS ||--o{ AGENDAMENTOS : "atende"
+    PROFISSIONAIS ||--o{ PROFISSIONAL_SERVICO : "possui"
+    SERVICOS ||--o{ PROFISSIONAL_SERVICO : "é realizado por"
+    USUARIOS {
+        INT id PK
+        VARCHAR nome
+        VARCHAR email UK
+        VARCHAR telefone
+        VARCHAR senha_hash
+        ENUM perfil
+        DATETIME criado_em
+    }
+    SERVICOS {
+        INT id PK
+        VARCHAR nome UK
+        VARCHAR descricao
+        SMALLINT duracao_min
+        DECIMAL preco
+        TINYINT ativo
+    }
+    PROFISSIONAIS {
+        INT id PK
+        VARCHAR nome
+        VARCHAR especialidade
+        TINYINT ativo
+    }
+    PROFISSIONAL_SERVICO {
+        INT profissional_id PK,FK
+        INT servico_id PK,FK
+    }
+    AGENDAMENTOS {
+        INT id PK
+        INT cliente_id FK
+        INT servico_id FK
+        INT profissional_id FK
+        DATE data
+        TIME hora_inicio
+        TIME hora_fim
+        ENUM status
+        VARCHAR observacao
+        DATETIME criado_em
+    }

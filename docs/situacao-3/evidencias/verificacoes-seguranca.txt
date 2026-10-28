@@ -1,0 +1,19 @@
+Verificações de segurança executadas com curl contra o sistema rodando (PHP 8.3 + MariaDB)
+
+1) SQL Injection no login
+   e-mail: admin@agendafacil.com' OR 1=1 --   senha: x
+   Resultado: redirecionado de volta para ?r=login com "E-mail ou senha incorretos." (não autenticou)
+
+2) Envio de formulário sem token CSRF (POST login sem _csrf)
+   Resultado: requisição recusada antes do controller; mensagem "Sua sessão expirou. Tente novamente."
+
+3) XSS no cadastro
+   nome: <script>alert(1)</script> Hacker
+   Resultado: exibido como texto "Olá, &lt;script&gt;alert(1)&lt;/script&gt;"; 0 ocorrências de <script>alert no HTML
+
+4) Antes/depois do BUG-01 (teste automatizado Playwright)
+   Antes:  enviar vazio -> preencher -> clicar "Criar conta": URL final ?r=cadastro (clique perdido)
+   Depois: mesma sequência: URL final ?r=agendamentos%2Fnovo e alerta "Conta criada com sucesso!"
+
+5) BUG-04 (retorno após login)
+   Acesso deslogado a ?r=agendamentos/novo&servico=3 -> login -> URL final ?r=agendamentos%2Fnovo&servico=3, serviço "Manicure" selecionado

@@ -1,0 +1,12 @@
+flowchart LR
+    H[Início / Serviços] --> LO[Login]
+    H --> CA[Criar conta]
+    H --> NA
+    LO -->|cliente| MA[Meus agendamentos]
+    LO -->|admin| PA[Painel]
+    CA --> NA[Novo agendamento]
+    NA -->|sucesso| MA
+    MA --> NA
+    PA --> AG[Agenda geral]
+    PA --> SE[Serviços] --> SF[Form. serviço]
+    PA --> PF[Profissionais] --> PFF[Form. profissional]

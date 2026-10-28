@@ -1,0 +1,37 @@
+erros cadastro vazio: 4
+mascara: (11) 97777-6666
+apos cadastro url: http://127.0.0.1:8000/index.php?r=agendamentos%2Fnovo | Conta criada com sucesso! Agora é só agendar.
+×
+data: 2026-10-26
+profs: [
+  'Selecione...',
+  'Ana Lima — Cabeleireira',
+  'Carlos Souza — Barbeiro'
+]
+slots: 16
+apos agendar: http://127.0.0.1:8000/index.php?r=agendamentos | Agendamento confirmado: Corte de cabelo com Ana Lima em 26/10/2026 às 10:00.
+×
+10:00 ainda listado? 0
+domingo msg: Não atendemos aos domingos. Escolha outra data.
+sem horario msg: [ 'Escolha um horário.' ]
+cancelar: Agendamento cancelado.
+×
+cliente->admin: Acesso negado
+login errado: E-mail ou senha incorretos.
+×
+admin url: http://127.0.0.1:8000/index.php?r=admin
+linhas agenda: 6
+servico erros (navegador): [ 'Duração fora do intervalo permitido.' ]
+servico erros: [
+  'Já existe um serviço com este nome.',
+  'Preço deve ser um número positivo.'
+]
+servico salvo: Serviço cadastrado.
+×
+prof erros: [ 'Selecione pelo menos um serviço.' ]
+404: Página não encontrada
+mobile scrollWidth: 390
+erros JS: [
+  'Failed to load resource: the server responded with a status of 403 (Forbidden)',
+  'Failed to load resource: the server responded with a status of 404 (Not Found)'
+]

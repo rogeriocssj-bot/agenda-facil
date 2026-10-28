@@ -1,0 +1,74 @@
+classDiagram
+    direction LR
+    class Usuario {
+        -int id
+        -string nome
+        -string email
+        -string telefone
+        -string senhaHash
+        -Perfil perfil
+        +criar(dados) int
+        +autenticar(email, senha) Usuario
+        +buscarPorEmail(email) Usuario
+    }
+    class Servico {
+        -int id
+        -string nome
+        -string descricao
+        -int duracaoMin
+        -decimal preco
+        -bool ativo
+        +listar(somenteAtivos) Servico[]
+        +salvar(dados, id) int
+        +possuiAgendamentos(id) bool
+    }
+    class Profissional {
+        -int id
+        -string nome
+        -string especialidade
+        -bool ativo
+        +listarPorServico(servicoId) Profissional[]
+        +realizaServico(profId, servicoId) bool
+        +salvar(dados, servicos, id) int
+    }
+    class Agendamento {
+        -int id
+        -date data
+        -time horaInicio
+        -time horaFim
+        -Status status
+        -string observacao
+        +criar(dados) int
+        +ocupados(profId, data) array
+        +alterarStatus(id, status) bool
+        +resumoPorStatus(inicio, fim) array
+    }
+    class AgendamentoService {
+        +calcularHoraFim(inicio, duracao) string
+        +haConflito(ocupados, inicio, fim) bool
+        +horariosDisponiveis(prof, servico, data, agora) string[]
+        +agendar(...) int
+        +cancelarPeloCliente(id, cliente, agora) void
+        +alterarStatus(id, status) void
+    }
+    class Status {
+        <<enumeration>>
+        agendado
+        confirmado
+        concluido
+        cancelado
+    }
+    class Perfil {
+        <<enumeration>>
+        admin
+        cliente
+    }
+    Usuario "1" --> "0..*" Agendamento : realiza
+    Servico "1" --> "0..*" Agendamento : é agendado em
+    Profissional "1" --> "0..*" Agendamento : atende
+    Profissional "0..*" -- "1..*" Servico : realiza
+    AgendamentoService ..> Agendamento : usa
+    AgendamentoService ..> Servico : usa
+    AgendamentoService ..> Profissional : usa
+    Agendamento --> Status
+    Usuario --> Perfil

@@ -1,0 +1,35 @@
+sequenceDiagram
+    autonumber
+    actor C as Cliente
+    participant V as View (novo.php + app.js)
+    participant CT as AgendamentoController
+    participant S as AgendamentoService
+    participant M as Models (Agendamento/Servico/Profissional)
+    participant DB as MySQL
+    C->>V: Escolhe serviço
+    V->>CT: GET api/profissionais?servico=1
+    CT->>M: listarPorServico(1)
+    M->>DB: SELECT ... profissional_servico
+    DB-->>M: profissionais
+    CT-->>V: JSON profissionais
+    C->>V: Escolhe profissional e data
+    V->>CT: GET api/horarios?servico&profissional&data
+    CT->>S: horariosDisponiveis(...)
+    S->>M: ocupados(profissional, data)
+    M->>DB: SELECT agendamentos não cancelados
+    DB-->>M: horários ocupados
+    S-->>CT: horários livres
+    CT-->>V: JSON horários
+    C->>V: Escolhe horário e confirma
+    V->>CT: POST agendamentos/novo (+ token CSRF)
+    CT->>CT: Validator (campos obrigatórios, formato)
+    CT->>S: agendar(cliente, serviço, profissional, data, hora)
+    S->>S: RN01..RN05 (passado, expediente, conflitos)
+    alt regra violada
+        S-->>CT: RegraNegocioException
+        CT-->>C: Volta ao formulário com mensagem de erro
+    else tudo certo
+        S->>M: criar(agendamento)
+        M->>DB: INSERT INTO agendamentos
+        CT-->>C: Redireciona para "Meus agendamentos" com mensagem de sucesso
+    end

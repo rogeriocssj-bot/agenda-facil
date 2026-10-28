@@ -1,0 +1,30 @@
+flowchart LR
+    V(["👤 Visitante"])
+    C(["👤 Cliente"])
+    A(["👤 Administrador"])
+    subgraph S["Sistema AgendaFácil"]
+        UC01(["UC01 Ver serviços"])
+        UC02(["UC02 Criar conta"])
+        UC03(["UC03 Fazer login"])
+        UC04(["UC04 Agendar horário"])
+        UC05(["UC05 Consultar horários livres"])
+        UC06(["UC06 Ver meus agendamentos"])
+        UC07(["UC07 Cancelar agendamento"])
+        UC08(["UC08 Ver painel"])
+        UC09(["UC09 Gerenciar agenda / status"])
+        UC10(["UC10 Manter serviços"])
+        UC11(["UC11 Manter profissionais"])
+    end
+    V --- UC01
+    V --- UC02
+    V --- UC03
+    C --- UC04
+    C --- UC06
+    C --- UC07
+    UC04 -. "«include»" .-> UC05
+    UC08 --- A
+    UC09 --- A
+    UC10 --- A
+    UC11 --- A
+    C -. "herda de" .-> V
+    style S fill:#f8fafc,stroke:#0f766e

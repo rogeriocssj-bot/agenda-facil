@@ -1,0 +1,19 @@
+flowchart TD
+    I([Início]) --> L{Está logado?}
+    L -- Não --> LG[Fazer login ou criar conta] --> SV
+    L -- Sim --> SV[Escolher serviço]
+    SV --> PR[Sistema lista profissionais que fazem o serviço]
+    PR --> TP{Há profissional?}
+    TP -- Não --> MSG1[Mensagem: nenhum profissional disponível] --> SV
+    TP -- Sim --> EP[Escolher profissional]
+    EP --> DT[Escolher data]
+    DT --> DOM{É domingo?}
+    DOM -- Sim --> MSG2[Mensagem: não atendemos aos domingos] --> DT
+    DOM -- Não --> HL[Sistema calcula horários livres]
+    HL --> TH{Há horários livres?}
+    TH -- Não --> MSG3[Mensagem: tente outro dia ou profissional] --> DT
+    TH -- Sim --> EH[Escolher horário e confirmar]
+    EH --> VR{Regras de negócio OK?}
+    VR -- Não --> MSG4[Mensagem com o motivo] --> EH
+    VR -- Sim --> GR[Gravar agendamento com status 'agendado']
+    GR --> F([Fim: mensagem de confirmação])

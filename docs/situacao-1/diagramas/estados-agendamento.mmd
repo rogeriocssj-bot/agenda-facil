@@ -1,0 +1,9 @@
+stateDiagram-v2
+    [*] --> Agendado : cliente agenda
+    Agendado --> Confirmado : admin confirma
+    Agendado --> Cancelado : cliente (até 2h antes) ou admin
+    Agendado --> Concluido : admin conclui
+    Confirmado --> Concluido : admin conclui
+    Confirmado --> Cancelado : cliente (até 2h antes) ou admin
+    Concluido --> [*]
+    Cancelado --> [*]

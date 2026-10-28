@@ -1,0 +1,66 @@
+Agendamento Regras (Tests\Unit\AgendamentoRegras)
+ [x] Calcula hora fim pela duracao
+ [x] Duracao invalida lanca excecao
+ [x] Servico que ultrapassa meia noite e lanca excecao
+ [x] Deteccao de sobreposicao with data set "mesmo horário"
+ [x] Deteccao de sobreposicao with data set "começa no meio do outro"
+ [x] Deteccao de sobreposicao with data set "engloba o outro"
+ [x] Deteccao de sobreposicao with data set "encosta no fim (permitido)"
+ [x] Deteccao de sobreposicao with data set "encosta no início"
+ [x] Deteccao de sobreposicao with data set "totalmente separado"
+ [x] Ha conflito com lista de ocupados
+ [x] Transicoes de status
+
+Validator (Tests\Unit\Validator)
+ [x] Campo obrigatorio vazio gera erro
+ [x] Email invalido gera erro
+ [x] Email valido passa
+ [x] Tamanho minimo da senha
+ [x] Confirmacao de senha diferente
+ [x] Campo opcional vazio nao e validado
+ [x] Validacao de data with data set "data válida"
+ [x] Validacao de data with data set "dia inexistente"
+ [x] Validacao de data with data set "formato brasileiro"
+ [x] Validacao de data with data set "texto"
+ [x] Validacao de hora with data set #0
+ [x] Validacao de hora with data set #1
+ [x] Validacao de hora with data set #2
+ [x] Validacao de hora with data set #3
+ [x] Validacao de hora with data set #4
+ [x] Telefone no formato brasileiro
+ [x] Preco aceita virgula e rejeita negativo
+ [x] Regra desconhecida lanca excecao
+
+Agendamento Service (Tests\Integration\AgendamentoService)
+ [x] Agendamento valido e gravado com hora fim calculada
+ [x] Nao permite agendar no passado
+ [x] Nao permite agendar no domingo
+ [x] Nao permite servico terminar apos fechamento
+ [x] Nao permite conflito de horario do profissional
+ [x] Permite mesmo horario com outro profissional
+ [x] Nao permite cliente em dois lugares ao mesmo tempo
+ [x] Profissional precisa realizar o servico
+ [x] Nao permite servico ou profissional inativo
+ [x] Horario cancelado volta a ser disponivel
+ [x] Horarios disponiveis excluem ocupados
+ [x] Horarios disponiveis respeitam duracao do servico
+ [x] Horarios do dia atual ignoram horas passadas
+ [x] Domingo nao tem horarios
+ [x] Cliente cancela com antecedencia
+ [x] Cliente nao cancela com menos de duas horas
+ [x] Cliente nao cancela agendamento de outro cliente
+ [x] Admin confirma e conclui agendamento
+ [x] Agendamento concluido nao pode ser cancelado
+ [x] Resumo e faturamento do periodo
+
+Models (Tests\Integration\Models)
+ [x] Cadastro de usuario guarda senha criptografada
+ [x] Login com senha correta e incorreta
+ [x] Email duplicado e bloqueado pelo banco
+ [x] Crud de servico
+ [x] Nome de servico duplicado ignorando maiusculas
+ [x] Listar somente servicos ativos
+ [x] Profissional com servicos
+ [x] Listar profissionais por servico ignora inativos
+ [x] Servico com agendamento nao pode ser excluido
+
